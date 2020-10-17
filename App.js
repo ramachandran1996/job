@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {HomeScreen} from '../job/src/Screens/HomeScreen';
+import {JobDescription} from '../job/src/Screens/JobDescription'
 
 function DetailsScreen() {
   return (
@@ -26,7 +27,7 @@ function App() {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Jobs" component={JobDescription} />
       </Stack.Navigator>
     </NavigationContainer>
   );

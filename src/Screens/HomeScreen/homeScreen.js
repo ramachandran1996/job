@@ -5,6 +5,7 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 
 import {wHeight} from '../../Component/StyledComponent';
 import {ScrollView} from 'react-native-gesture-handler';
+import Card from './component/Card';
 
 const JobsInformation = [
   {
@@ -40,30 +41,15 @@ const HomeScreen = ({...props}) => {
           <Text style={styles.title}>Jobs for you</Text>
           {JobsInformation.map((item) => {
             return (
-              <View style={styles.cardContainer} key={item.jobtitle}>
-                <View style={styles.cardTopContainer}>
-                  <View style={styles.topLeftConatiner}>
-                    <View style={styles.imageWrapper}>
-                      <Image source={item.Image} style={styles.image} />
-                    </View>
-                  </View>
-
-                  <View style={styles.topRightContainer}>
-                    <Text style={styles.companyname}>{item.companyname}</Text>
-                    <Text style={styles.title}>{item.jobtitle}</Text>
-                    <Text style={styles.greyColor}>{item.location}</Text>
-                  </View>
-                </View>
-                <View style={styles.dashed} />
-                <View style={styles.cardBottomContainer}>
-                  <Text style={styles.dummyContainer} />
-                  <Text style={[styles.datefield, styles.greyColor]}>
-                    {item.date}
-                  </Text>
-
-                  <Text style={styles.Applyfield}>Apply {'>'}</Text>
-                </View>
-              </View>
+              <Card
+                key={item.jobtitle}
+                image={item.Image}
+                companyname={item.companyname}
+                jobtitle={item.jobtitle}
+                location={item.location}
+                date={item.date}
+                onpress={() => navigation.navigate('Jobs')}
+              />
             );
           })}
         </View>
