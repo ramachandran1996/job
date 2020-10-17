@@ -1,60 +1,47 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Button} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {wHeight, wWidth} from '../../Component/StyledComponent';
-import DescriptionCard from './components/DescriptionCard';
-import Card from './components/card';
-
-const JobDescription = ({props}) => {
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {wWidth, wHeight} from '../../../Component/StyledComponent';
+const Card = ({...props}) => {
   return (
-    <View style={styles.container}>
-      <Card {...props} />
-      <DescriptionCard
-        image={require('../../../assets/job-description.png')}
-        title={'Description'}
-        {...props}>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          We are looking for intelligent
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          innovative,and hardworking people
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          Who can add value as ui/ux designer
-        </Text>
-      </DescriptionCard>
-
-      <DescriptionCard
-        image={require('../../../assets/responsibility.png')}
-        title={'Responsibility'}
-        {...props}>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          Conduct user research
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          visual designing,wireframing
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          Build top class experience
-        </Text>
-      </DescriptionCard>
-      <DescriptionCard
-        image={require('../../../assets/skill.png')}
-        title={'Skills'}
-        {...props}>
-        <View style={styles.skillstextWrapper}>
-          <Text style={styles.skillsText}>ui/ux designer</Text>
-          <Text style={styles.skillsText}>research</Text>
-          <Text style={styles.skillsText}>Sketch</Text>
+    <View style={styles.cardContainer}>
+      <View style={styles.cardTopContainer}>
+        <View style={styles.topLeftConatiner}>
+          <View style={styles.imageWrapper}>
+            <Image
+              source={require('../../../../assets/apple_logo.jpeg')}
+              style={styles.image}
+            />
+          </View>
         </View>
-      </DescriptionCard>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.whiteColor}>Apply</Text>
-      </TouchableOpacity>
+
+        <View style={styles.topRightContainer}>
+          <Text style={styles.companyname}>Apple</Text>
+          <Text style={[styles.title, styles.whiteColor, {marginVertical: 5}]}>
+            Product Designer
+          </Text>
+          <Text style={styles.greyColor}>Chennai, Tn</Text>
+        </View>
+      </View>
+      {/* <View style={styles.dashed} /> */}
+      <View style={styles.bottomWrapper}>
+        <View style={styles.bottomContainer}>
+          <View style={styles.bottomLeftContainer}>
+            <Text style={styles.greyColor}>Type</Text>
+            <Text style={[styles.title, styles.whiteColor]}>Full-time</Text>
+          </View>
+          <View style={styles.middleLine} />
+          <View style={styles.bottomLeftContainer}>
+            <Text style={styles.greyColor}>Experience</Text>
+            <Text style={[styles.title, styles.whiteColor]}>3+ years</Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
-export default JobDescription;
+
+export default Card;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
