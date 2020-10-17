@@ -1,47 +1,30 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {wWidth, wHeight} from '../../../Component/StyledComponent';
-const Card = ({...props}) => {
+import React, { memo } from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {wWidth, wHeight, Button} from '../../../Component/StyledComponent';
+let currenindex1;
+const SubmitPage = ({onpress, onsubmit, currenindex, ...props}) => {
+  currenindex1 = currenindex;
   return (
-    <View style={styles.cardContainer}>
-      <View style={styles.cardTopContainer}>
-        <View style={styles.topLeftConatiner}>
-          <View style={styles.imageWrapper}>
-            <Image
-              source={require('../../../../assets/apple_logo.jpeg')}
-              style={styles.image}
-            />
-          </View>
-        </View>
+    <View style={[styles.bottomSheetWraper, {paddingHorizontal: 30}]}>
+      <View style={styles.pageNationConitainer}>
+        <Text style={[styles.pageNationField1]} onPress={onpress}>
+          apply
+        </Text>
+        <Text style={styles.pageNationfield2}>done</Text>
+      </View>
 
-        <View style={styles.topRightContainer}>
-          <Text style={styles.companyname}>Apple</Text>
-          <Text style={[styles.title, styles.whiteColor, {marginVertical: 5}]}>
-            Product Designer
-          </Text>
-          <Text style={styles.greyColor}>Chennai, Tn</Text>
-        </View>
-      </View>
-      {/* <View style={styles.dashed} /> */}
-      <View style={styles.bottomWrapper}>
-        <View style={styles.bottomContainer}>
-          <View style={styles.bottomLeftContainer}>
-            <Text style={styles.greyColor}>Type</Text>
-            <Text style={[styles.title, styles.whiteColor]}>Full-time</Text>
-          </View>
-          <View style={styles.middleLine} />
-          <View style={styles.bottomLeftContainer}>
-            <Text style={styles.greyColor}>Experience</Text>
-            <Text style={[styles.title, styles.whiteColor]}>3+ years</Text>
-          </View>
-        </View>
-      </View>
+      <Text style={[styles.title]}>
+        {''} Your job Application has been submitted sucessfully
+      </Text>
+      <Text style={[styles.greyColor]}>
+        {''} Look out for other interesting job opening that matches your
+        interest
+      </Text>
+      <Button onpress={onsubmit} label={'Done'} addstyles={styles.doneButton}/>
     </View>
   );
 };
-
-export default Card;
-
+export default memo(SubmitPage);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -174,5 +157,56 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F7',
     borderRadius: 10,
     marginHorizontal: 8,
+  },
+  bottomsheetimage: {
+    position: 'absolute',
+    top: '-9%',
+    left: '50%',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  bottomsheetInput: {
+    borderWidth: 0.5,
+    borderRadius: 5,
+    minHeight: wHeight * 0.2,
+    paddingHorizontal: 10,
+  },
+  bottomSheetWraper: {
+    height: wHeight / 2,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    justifyContent: 'space-evenly',
+  },
+  bottomSheetContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
+  doneButton: {
+    width: '50%',
+    alignSelf: 'center',
+  },
+  pageNationConitainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // alignSelf:'center'
+  },
+  pageNationField1: {
+    height: 40,
+    padding: 10,
+    borderWidth: currenindex1 ? 2 : 0,
+    margin: 2,
+  },
+  pageNationfield2: {
+    height: 40,
+    padding: 10,
+    borderWidth: currenindex1 ? 0 : 2,
+    borderColor: 'red',
   },
 });

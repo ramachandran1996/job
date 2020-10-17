@@ -1,56 +1,125 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image, Button} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {wHeight, wWidth} from '../../Component/StyledComponent';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {wHeight, wWidth, Button} from '../../Component/StyledComponent';
 import DescriptionCard from './components/DescriptionCard';
-import Card from './components/card';
+import Card from './components/Card';
+import ApplyPage from './components/Applypage';
+import SubmitPage from './components/SubmitPage';
+import Modal from 'react-native-modal';
 
+const Description = [
+  'We are looking for intelligent',
+  'Innovative,and hardworking people',
+  'Who can add value as ui/ux designer',
+  'Conduct user research', //responsibility
+  'visual designing,wireframing',
+  'Build top class experience',
+  'ui/ux designer', //skills
+  'research',
+  'Sketch',
+];
 const JobDescription = ({props}) => {
-  return (
+  const [loading, setLoading] = useState(true);
+  const [isvisible, setIsvisible] = useState(false);
+  const [currenindex, setCurrentIndex] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); //componentdidmount
+  }, []);
+  const toggle = () => {
+    setIsvisible(!isvisible);
+  };
+
+  return !loading ? (
     <View style={styles.container}>
       <Card {...props} />
       <DescriptionCard
         image={require('../../../assets/job-description.png')}
         title={'Description'}
         {...props}>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          We are looking for intelligent
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          innovative,and hardworking people
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          Who can add value as ui/ux designer
-        </Text>
+        {Description.slice(0, 3).map((item) => {
+          return (
+            <Text style={[styles.greyColor, styles.paddingVertical]} key={item}>
+              {item}
+            </Text>
+          );
+        })}
       </DescriptionCard>
 
       <DescriptionCard
         image={require('../../../assets/responsibility.png')}
         title={'Responsibility'}
         {...props}>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          Conduct user research
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          visual designing,wireframing
-        </Text>
-        <Text style={[styles.greyColor, styles.paddingVertical]}>
-          Build top class experience
-        </Text>
+        {Description.slice(3, 6).map((item) => {
+          return (
+            <Text style={[styles.greyColor, styles.paddingVertical]} key={item}>
+              {item}
+            </Text>
+          );
+        })}
       </DescriptionCard>
       <DescriptionCard
         image={require('../../../assets/skill.png')}
         title={'Skills'}
         {...props}>
         <View style={styles.skillstextWrapper}>
-          <Text style={styles.skillsText}>ui/ux designer</Text>
-          <Text style={styles.skillsText}>research</Text>
-          <Text style={styles.skillsText}>Sketch</Text>
+          {Description.slice(6, Description.length).map((item) => {
+            return (
+              <Text style={styles.skillsText} key={item}>
+                {item}
+              </Text>
+            );
+          })}
         </View>
       </DescriptionCard>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.whiteColor}>Apply</Text>
-      </TouchableOpacity>
+      <Button
+        label={'Apply'}
+        onpress={() => {
+          toggle();
+        }}
+        width={'100%'}
+      />
+
+      <Modal
+        isVisible={isvisible}
+        onBackdropPress={() => setIsvisible(false)}
+        onBackButtonPress={() => setIsvisible(false)}
+        animationIn={'bounceInUp'}
+        animationOut={'slideOutDown'}
+        useNativeDriver={true}
+        animationInTiming={1200}
+        animationOutTiming={1000}>
+        <View style={styles.bottomSheetContainer}>
+          {currenindex ? (
+            <ApplyPage
+              onpress={() => setCurrentIndex(!currenindex)}
+              {...props}
+            />
+          ) : (
+            <SubmitPage
+              onpress={() => {
+                setCurrentIndex(!currenindex);
+                // setIsvisible(!isvisible);
+              }}
+              currenindex={currenindex}
+              {...props}
+              onsubmit={() => {
+                setIsvisible(!isvisible);
+                setTimeout(() => {
+                  setCurrentIndex(!currenindex);
+                }, 300);
+              }}
+            />
+          )}
+        </View>
+      </Modal>
+    </View>
+  ) : (
+    <View
+      style={[styles.flex, {justifyContent: 'center', alignItems: 'center'}]}>
+      <ActivityIndicator size={'large'} color={'red'} />
     </View>
   );
 };
@@ -187,5 +256,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F7',
     borderRadius: 10,
     marginHorizontal: 8,
+  },
+  bottomsheetimage: {
+    position: 'absolute',
+    top: '-9%',
+    left: '50%',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  bottomsheetInput: {
+    borderWidth: 0.5,
+    borderRadius: 5,
+    minHeight: wHeight * 0.2,
+    paddingHorizontal: 10,
+  },
+  bottomSheetWraper: {
+    height: wHeight / 2,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    justifyContent: 'space-evenly',
+  },
+  bottomSheetContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
+  doneButton: {
+    width: '50%',
+    alignSelf: 'center',
+  },
+  pageNationConitainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
