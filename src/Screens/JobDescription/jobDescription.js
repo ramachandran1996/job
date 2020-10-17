@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
-import {wHeight, wWidth, Button} from '../../Component/StyledComponent';
+import {
+  wHeight,
+  wWidth,
+  Button,
+  ImageComponent,
+} from '../../Component/StyledComponent';
 import DescriptionCard from './components/DescriptionCard';
 import Card from './components/Card';
 import ApplyPage from './components/Applypage';
@@ -54,9 +59,18 @@ const JobDescription = ({props}) => {
         {...props}>
         {Description.slice(3, 6).map((item) => {
           return (
-            <Text style={[styles.greyColor, styles.paddingVertical]} key={item}>
-              {item}
-            </Text>
+            <View style={styles.responsibiltyText}>
+              <ImageComponent
+                addstyles={styles.arrowRight}
+                resizemode={'contain'}
+                image={require('../../../assets/arrow_right.png')}
+              />
+              <Text
+                style={[styles.greyColor, styles.paddingVertical]}
+                key={item}>
+                {item}
+              </Text>
+            </View>
           );
         })}
       </DescriptionCard>
@@ -294,5 +308,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  responsibiltyText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  arrowRight: {
+    width: 20,
+    height: 10,
+    marginRight: 10,
   },
 });
