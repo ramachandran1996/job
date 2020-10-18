@@ -5,23 +5,26 @@ const Card = ({item, ...props}) => {
   const ImageSwitch = (argument) => {
     // console.log('argument', argument);
     switch (argument) {
-      case 3:
+      case 'Apple':
         return require('../../../../assets/apple_logo.jpeg');
-      case 4:
+      case 'Untapped':
         return require('../../../../assets/Untappd.png');
-      case 5:
+      case 'Paypal':
         return require('../../../../assets/paypal-logo.png');
       default:
         require('../../../../assets/apple_logo.jpeg');
     }
   };
-  // console.log('card', item);
+  console.log('card', item);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardTopContainer}>
         <View style={styles.topLeftConatiner}>
           <View style={styles.imageWrapper}>
-            <Image source={ImageSwitch(item.Image)} style={styles.image} />
+            <Image
+              source={ImageSwitch(item.companyname)}
+              style={styles.image}
+            />
           </View>
         </View>
 
