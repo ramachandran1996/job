@@ -15,7 +15,7 @@ const Card = ({item, ...props}) => {
         require('../../../../assets/apple_logo.jpeg');
     }
   };
-  console.log('card', item);
+  // console.log('card', item);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardTopContainer}>
