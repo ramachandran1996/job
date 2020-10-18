@@ -30,7 +30,8 @@ const Card = ({item, ...props}) => {
 
         <View style={styles.topRightContainer}>
           <Text style={styles.companyname}>{item.companyname}</Text>
-          <Text style={[styles.title, styles.whiteColor, {marginVertical: 5}]}>
+          <Text
+            style={[styles.title, styles.whiteColor, styles.marginVertical]}>
             {item.jobtitle}
           </Text>
           <Text style={styles.greyColor}>{item.location}</Text>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   cardContainer: {
-    height: wHeight * 0.3,
+    height: wHeight * 0.32,
     backgroundColor: '#292BB0',
     borderRadius: 20,
     // marginVertical: 20,
@@ -134,6 +135,9 @@ const styles = StyleSheet.create({
   bottomLeftContainer: {
     width: '49%',
     padding: 15,
+  },
+  marginVertical: {
+    marginVertical: 5,
   },
 
   greyColor: {
