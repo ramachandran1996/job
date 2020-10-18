@@ -24,8 +24,8 @@ const Description = [
   'Sketch',
 ];
 const JobDescription = ({route, ...props}) => {
-  const item = route.params.item;
-  console.log(item);
+  const items = route.params.item;
+  // console.log(items);
   const [loading, setLoading] = useState(true);
   const [isvisible, setIsvisible] = useState(false);
   const [currenindex, setCurrentIndex] = useState(true);
@@ -41,7 +41,7 @@ const JobDescription = ({route, ...props}) => {
 
   return !loading ? (
     <View style={styles.container}>
-      <Card {...props} item={item} />
+      <Card {...props} item={items} />
       <DescriptionCard
         image={require('../../../assets/job-description.png')}
         title={'Description'}
