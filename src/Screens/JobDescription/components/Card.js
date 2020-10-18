@@ -1,25 +1,36 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {wWidth, wHeight} from '../../../Component/StyledComponent';
-const Card = ({...props}) => {
+const Card = ({item, ...props}) => {
+  const ImageSwitch = (argument) => {
+    // console.log('argument', argument);
+    switch (argument) {
+      case 3:
+        return require('../../../../assets/apple_logo.jpeg');
+      case 4:
+        return require('../../../../assets/Untappd.png');
+      case 5:
+        return require('../../../../assets/paypal-logo.png');
+      default:
+        require('../../../../assets/apple_logo.jpeg');
+    }
+  };
+  // console.log('card', item);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardTopContainer}>
         <View style={styles.topLeftConatiner}>
           <View style={styles.imageWrapper}>
-            <Image
-              source={require('../../../../assets/apple_logo.jpeg')}
-              style={styles.image}
-            />
+            <Image source={ImageSwitch(item.Image)} style={styles.image} />
           </View>
         </View>
 
         <View style={styles.topRightContainer}>
-          <Text style={styles.companyname}>Apple</Text>
+          <Text style={styles.companyname}>{item.companyname}</Text>
           <Text style={[styles.title, styles.whiteColor, {marginVertical: 5}]}>
-            Product Designer
+            {item.jobtitle}
           </Text>
-          <Text style={styles.greyColor}>Chennai, Tn</Text>
+          <Text style={styles.greyColor}>{item.location}</Text>
         </View>
       </View>
       {/* <View style={styles.dashed} /> */}
@@ -121,7 +132,7 @@ const styles = StyleSheet.create({
     width: '49%',
     padding: 15,
   },
- 
+
   greyColor: {
     color: 'grey',
     fontWeight: 'normal',
@@ -129,5 +140,4 @@ const styles = StyleSheet.create({
   whiteColor: {
     color: 'white',
   },
-
 });

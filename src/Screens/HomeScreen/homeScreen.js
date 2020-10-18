@@ -65,7 +65,7 @@ const HomeScreen = ({...props}) => {
                 jobtitle={item.jobtitle}
                 location={item.location}
                 date={item.date}
-                onpress={() => navigation.navigate('Jobs')}
+                onpress={() => navigation.navigate('Jobs', {item: item})}
               />
             );
           })}
